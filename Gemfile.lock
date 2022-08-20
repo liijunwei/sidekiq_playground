@@ -8,6 +8,7 @@ GEM
       coderay (~> 1.1)
       method_source (~> 1.0)
     rack (2.2.4)
+    rake (13.0.6)
     redis (4.7.1)
     sidekiq (6.5.4)
       connection_pool (>= 2.2.2)
@@ -19,6 +20,7 @@ PLATFORMS
 
 DEPENDENCIES
   pry
+  rake
   sidekiq
 
 BUNDLED WITH
