@@ -17,10 +17,9 @@ class OurWorker
       sleep 5
       puts "Really took a bit of effort"
     when "hard"
-      sleep 5
+      sleep 2
       puts "That was a bit of work"
     else
-      sleep 1
       puts "That wasn't a lot of effort"
     end
   end
