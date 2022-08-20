@@ -1,6 +1,6 @@
 worker_file = "./worker.rb"
 
-desc 'Start worker'
+desc 'Start worker, we can always start multiple workers'
 task :worker do
   sh "bundle exec sidekiq -r #{worker_file}"
 end
