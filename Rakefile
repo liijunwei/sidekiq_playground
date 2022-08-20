@@ -39,4 +39,21 @@ task :help do
   puts
 end
 
+desc 'Reset sidekiq stat'
+task :reset_sidekiq_stat do
+  require 'sidekiq/api'
+  require 'json'
+
+  Sidekiq.configure_client do |config|
+    config.redis = {db: 1}
+  end
+
+  jj Sidekiq::Stats.new.fetch_stats!
+
+  Sidekiq.redis {|c| c.del('stat:processed') }
+  Sidekiq.redis {|c| c.del('stat:failed') }
+
+  jj Sidekiq::Stats.new.fetch_stats!
+end
+
 task default: %i[help]
