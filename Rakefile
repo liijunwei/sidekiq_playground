@@ -1,12 +1,12 @@
 worker_file = "./worker.rb"
 
 desc 'Start worker'
-task :start_worker do
+task :worker do
   sh "bundle exec sidekiq -r #{worker_file}"
 end
 
 desc 'Start console'
-task :start_console do
+task :console do
   sh "bundle exec pry -r #{worker_file}"
 end
 
