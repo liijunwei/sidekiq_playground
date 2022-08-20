@@ -10,6 +10,12 @@ task :console do
   sh "bundle exec pry -r #{worker_file}"
 end
 
+desc 'Rotate session key'
+task :rotate_session_key do
+  require 'securerandom'
+  File.open(".session.key", "w") {|f| f.write(SecureRandom.hex(32)) }
+end
+
 desc 'Print sidekiq stats'
 task :sidekiqmon do
   sh "sidekiqmon"

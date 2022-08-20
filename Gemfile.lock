@@ -14,14 +14,17 @@ GEM
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.5.0)
+    webrick (1.7.0)
 
 PLATFORMS
   x86_64-darwin-20
 
 DEPENDENCIES
   pry
+  rack
   rake
   sidekiq
+  webrick
 
 BUNDLED WITH
    2.3.20
