@@ -16,9 +16,14 @@ task :rotate_session_key do
   File.open(".session.key", "w") {|f| f.write(SecureRandom.hex(32)) }
 end
 
-desc 'Start sidekiq web ui'
-task :webui => :rotate_session_key do
+desc 'Start rack server'
+task :server => :rotate_session_key do
   sh "bundle exec rackup"
+end
+
+desc 'Visit sidekiq web ui'
+task :webui do
+  sh "open http://localhost:9292"
 end
 
 desc 'Print sidekiq stats'
