@@ -1,5 +1,4 @@
 require 'sidekiq'
-# require 'sinatra'
 require 'webrick'
 
 Sidekiq.configure_client do |config|
