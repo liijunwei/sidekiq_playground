@@ -2,7 +2,7 @@ worker_file = "./worker.rb"
 
 desc 'Start worker, we can always start multiple workers'
 task :worker do
-  sh "bundle exec sidekiq -r #{worker_file}"
+  sh "bundle exec sidekiq --require #{worker_file} --concurrency 3"
 end
 
 desc 'Start console'
