@@ -26,11 +26,6 @@ task :webui do
   sh "open http://localhost:9292"
 end
 
-desc 'Print sidekiq stats'
-task :sidekiqmon do
-  sh "sidekiqmon"
-end
-
 desc 'Print usage'
 task :help do
   puts "Start worker -> open sepreate commandline prompt -> start console"
