@@ -7,7 +7,7 @@ end
 
 desc 'Start console'
 task :console do
-  sh "bundle exec pry -r #{worker_file}"
+  sh "bundle exec pry -r #{worker_file} -r sidekiq/api"
 end
 
 desc 'Rotate session key'
