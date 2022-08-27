@@ -1,8 +1,11 @@
 require 'sidekiq'
 require 'webrick'
+require 'yaml'
+
+redis_config = YAML.load_file("./redis_conf.yml").compact
 
 Sidekiq.configure_client do |config|
-  config.redis = {db: 1}
+  config.redis = redis_config
 end
 
 require 'sidekiq/web'

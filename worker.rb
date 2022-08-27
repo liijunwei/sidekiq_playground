@@ -1,11 +1,14 @@
 require 'sidekiq'
+require 'yaml'
+
+redis_config = YAML.load_file("./redis_conf.yml").compact
 
 Sidekiq.configure_client do |config|
-  config.redis = {db: 11}
+  config.redis = redis_config
 end
 
 Sidekiq.configure_server do |config|
-  config.redis = {db: 11}
+  config.redis = redis_config
 end
 
 class OurWorker

@@ -34,21 +34,24 @@ task :help do
   puts
 end
 
-desc 'Reset sidekiq stat'
-task :reset_sidekiq_stat do
+desc 'Reset redis'
+task :reset_redis do
   require 'sidekiq/api'
   require 'json'
+  require 'yaml'
+
+  redis_config = YAML.load_file("./redis_conf.yml").compact
 
   Sidekiq.configure_client do |config|
-    config.redis = {db: 1}
+    config.redis = redis_config
   end
 
   jj Sidekiq::Stats.new.fetch_stats!
 
-  Sidekiq.redis {|c| c.del('stat:processed') }
-  Sidekiq.redis {|c| c.del('stat:failed') }
+  Sidekiq.redis {|c| c.flushdb }
 
-  jj Sidekiq::Stats.new.fetch_stats!
+  puts
+  puts "#{redis_config.to_json} flushed"
 end
 
 task default: %i[help]
