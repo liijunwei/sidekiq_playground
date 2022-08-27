@@ -27,5 +27,3 @@ class Worker
     end
   end
 end
-
-OurWorker = Worker
