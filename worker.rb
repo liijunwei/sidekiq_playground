@@ -1,11 +1,11 @@
 require 'sidekiq'
 
 Sidekiq.configure_client do |config|
-  config.redis = {db: 1}
+  config.redis = {db: 11}
 end
 
 Sidekiq.configure_server do |config|
-  config.redis = {db: 1}
+  config.redis = {db: 11}
 end
 
 class OurWorker
