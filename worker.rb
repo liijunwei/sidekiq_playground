@@ -11,7 +11,7 @@ Sidekiq.configure_server do |config|
   config.redis = redis_config
 end
 
-class OurWorker
+class Worker
   include Sidekiq::Worker
 
   def perform(complexity)
@@ -28,3 +28,4 @@ class OurWorker
   end
 end
 
+OurWorker = Worker
