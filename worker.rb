@@ -1,14 +1,13 @@
 require 'sidekiq'
-require 'yaml'
 
-redis_config = YAML.load_file("./redis_conf.yml").compact
+sidekiq_url = ENV['JOB_WORKER_URL'] || "redis://localhost:6379/11"
 
 Sidekiq.configure_client do |config|
-  config.redis = redis_config
+  config.redis = {url: sidekiq_url}
 end
 
 Sidekiq.configure_server do |config|
-  config.redis = redis_config
+  config.redis = {url: sidekiq_url}
 end
 
 class Worker

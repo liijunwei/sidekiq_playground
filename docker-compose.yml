@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  redis:
+    image: redis:7.0
+    ports:
+      - '6379:6379'
+
+  sidekiq:
+    build:
+      context: .
+    command: bundle exec rake worker
+    links:
+      - redis
+    env_file:
+      - .env
+

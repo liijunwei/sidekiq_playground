@@ -37,13 +37,11 @@ end
 desc 'Reset redis'
 task :reset_redis do
   require 'sidekiq/api'
-  require 'json'
-  require 'yaml'
 
-  redis_config = YAML.load_file("./redis_conf.yml").compact
+  sidekiq_url = ENV['JOB_WORKER_URL'] || "redis://localhost:6379/11"
 
   Sidekiq.configure_client do |config|
-    config.redis = redis_config
+    config.redis = {url: sidekiq_url}
   end
 
   jj Sidekiq::Stats.new.fetch_stats!
@@ -51,7 +49,7 @@ task :reset_redis do
   Sidekiq.redis {|c| c.flushdb }
 
   puts
-  puts "#{redis_config.to_json} flushed"
+  puts "#{sidekiq_url} flushed"
 end
 
 task default: %i[help]
