@@ -18,12 +18,12 @@ class Worker
     case complexity
     when "super_hard"
       # raise "something bad happened..."
-      puts "Really took a bit of effort"
+      logger.info "Really took a bit of effort"
     when "hard"
       sleep 2
-      puts "That was a bit of work"
+      logger.info "That was a bit of work"
     else
-      puts "That wasn't a lot of effort"
+      logger.info "That wasn't a lot of effort"
     end
   end
 end
