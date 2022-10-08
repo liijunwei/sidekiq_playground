@@ -1,15 +1,15 @@
 FROM ruby:alpine
 
-RUN apk update && apk add bash build-base redis tzdata
-# RUN apk update && apk add bash build-base nodejs postgresql-dev tzdata
+RUN apk update \
+    && apk add bash build-base redis tzdata \
+    && mkdir /project
 
-RUN mkdir /project
 WORKDIR /project
 
-COPY Gemfile Gemfile.lock ./
-RUN gem install bundler:2.3.20 --no-document
-RUN bundle install
-
 COPY . .
+
+RUN gem install bundler --no-document \
+    && bundle update --bundler \
+    && bundle install
 
 CMD ["bundle", "exec", "rake", "worker"]
